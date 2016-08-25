@@ -6,7 +6,7 @@ import { Component } from 'angular2/core';
     <div class="container">
       <img src="resources/images/logo.jpg" />
       <h1>Video Store</h1>
-      <div *ngFor="#movie of movies">
+      <div *ngFor="#movie of movies" (click)="movieSelected(movie)">
         <h3>{{ movie.title }}</h3>
         <ul>
           <li>{{ movie.genre }}</li>
@@ -28,6 +28,9 @@ export class AppComponent {
       new Movie("The Goonies", "Action", "Richard Donner", "1985", "PG"),
       new Movie("Six Degrees of Separation", "Drama", "Fred Schepsi", "1993", "R"),
     ]
+  }
+  movieSelected(clickedMovie: Movie): void {
+    console.log(clickedMovie);
   }
 }
 

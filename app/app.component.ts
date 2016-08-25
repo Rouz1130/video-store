@@ -6,7 +6,15 @@ import { Component } from 'angular2/core';
     <div class="container">
       <img src="resources/images/logo.jpg" />
       <h1>Video Store</h1>
-      <h2>Movies: {{ movie.title }}</h2>
+      <div *ngFor="#movie of movies">
+        <h3>{{ movie.title }}</h3>
+        <ul>
+          <li>{{ movie.genre }}</li>
+          <li>{{ movie.year }}</li>
+          <li>{{ movie.rating }}</li>
+          <li>directed by: {{ movie.director }}</li>
+        </ul>
+      </div>
     </div>
     `
 })

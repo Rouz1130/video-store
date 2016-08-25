@@ -1,22 +1,37 @@
 import { Component } from 'angular2/core';
 
 @Component({
-  selector: 'my-app',
+  selector: 'movie-list',
+  inputs: ['movieList'],
   template: `
+  <div *ngFor="#currentMovie of movieList" (click)="movieClicked(currentMovie)">
+    <h3>{{ currentMovie.title }}</h3>
+    <ul>
+      <li>{{ currentMovie.genre }}</li>
+      <li>{{ currentMovie.year }}</li>
+      <li>{{ currentMovie.rating }}</li>
+      <li>directed by: {{ currentMovie.director }}</li>
+    </ul>
+  </div>
+  `
+})
+export class MovieListComponent {
+  public movieList: Movie[];
+  movieClicked(clickedMovie: Movie): void {
+    console.log(clickedMovie);
+  }
+}
+
+@Component({
+  selector: 'my-app',
+  directives: [MovieListComponent],
+  template:`
     <div class="container">
       <img src="resources/images/logo.jpg" />
       <h1>Video Store</h1>
-      <div *ngFor="#movie of movies" (click)="movieSelected(movie)">
-        <h3>{{ movie.title }}</h3>
-        <ul>
-          <li>{{ movie.genre }}</li>
-          <li>{{ movie.year }}</li>
-          <li>{{ movie.rating }}</li>
-          <li>directed by: {{ movie.director }}</li>
-        </ul>
-      </div>
+      <movie-list [movieList]="movies"></movie-list>
     </div>
-    `
+  `
 })
 export class AppComponent {
   public movies: Movie[];
@@ -28,9 +43,6 @@ export class AppComponent {
       new Movie("The Goonies", "Action", "Richard Donner", "1985", "PG"),
       new Movie("Six Degrees of Separation", "Drama", "Fred Schepsi", "1993", "R"),
     ]
-  }
-  movieSelected(clickedMovie: Movie): void {
-    console.log(clickedMovie);
   }
 }
 

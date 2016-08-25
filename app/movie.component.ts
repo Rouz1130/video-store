@@ -1,5 +1,5 @@
-import { Component } from 'angular2/core';
 import { Movie } from './movie.model';
+import { Component } from 'angular2/core';
 
 @Component({
   selector: 'movie-display',

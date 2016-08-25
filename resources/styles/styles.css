@@ -6,3 +6,7 @@ body {
 .selected {
   color: #22bdf0;
 }
+
+.movie-form {
+  color: black;
+}

@@ -1,10 +1,11 @@
+import { Movie } from './movie.model';
 import { Component, EventEmitter } from 'angular2/core';
 import { MovieListComponent } from './movie-list.component';
-import { Movie } from './movie.model';
+import {NewMovieComponent} from './new-movie.component';
 
 @Component({
   selector: 'my-app',
-  directives: [MovieListComponent],
+  directives: [MovieListComponent, NewMovieComponent],
   template:`
     <div class="container">
       <img src="resources/images/logo.jpg" />
@@ -13,6 +14,7 @@ import { Movie } from './movie.model';
         [movieList]="movies"
         (onMovieSelect)="movieSelected($event)">
       </movie-list>
+      <new-movie></new-movie>
     </div>
   `
 })
@@ -31,7 +33,7 @@ export class AppComponent {
       new Movie("All About My Mother", "Psycho-Sexual Drama", "Pedro Almodovar", "1999", "R"),
       new Movie("The Piano", "Fancy-Drama", "Jane Campion", "1993", "R"),
       new Movie("Dick Tracy", "Proto-Comics", "Warren Beatty", "1990", "PG"),
-      new Movie("Spy", "Action-Comedy", "Paul Feig", "2015", "R"),
+      new Movie("Spy", "Filthy Action-Comedy", "Paul Feig", "2015", "R"),
       new Movie("Kings of Summer", "Bildungsroman", "Jordan Vogt-Roberts", "2013", "R")
     ];
   }

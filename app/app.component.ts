@@ -1,8 +1,9 @@
-import { Component } from 'angular2/core';
+import { Component, EventEmitter } from 'angular2/core';
 
 @Component({
   selector: 'movie-list',
   inputs: ['movieList'],
+  outputs: ['onMovieSelect'],
   template: `
   <div *ngFor="#currentMovie of movieList" (click)="movieClicked(currentMovie)">
     <h3>{{ currentMovie.title }}</h3>
@@ -17,8 +18,13 @@ import { Component } from 'angular2/core';
 })
 export class MovieListComponent {
   public movieList: Movie[];
+  public onMovieSelect: EventEmitter<Movie>;
+  constructor() {
+    this.onMovieSelect = new EventEmitter();
+  }
   movieClicked(clickedMovie: Movie): void {
-    console.log(clickedMovie);
+    console.log('kiddo', clickedMovie);
+    this.onMovieSelect.emit(clickedMovie);
   }
 }
 
@@ -29,7 +35,10 @@ export class MovieListComponent {
     <div class="container">
       <img src="resources/images/logo.jpg" />
       <h1>Video Store</h1>
-      <movie-list [movieList]="movies"></movie-list>
+      <movie-list
+        [movieList]="movies"
+        (onMovieSelect)="movieSelected($event)">
+      </movie-list>
     </div>
   `
 })
@@ -43,6 +52,9 @@ export class AppComponent {
       new Movie("The Goonies", "Action", "Richard Donner", "1985", "PG"),
       new Movie("Six Degrees of Separation", "Drama", "Fred Schepsi", "1993", "R"),
     ]
+  }
+  movieSelected(clickedMovie: Movie): void {
+    console.log('parent', clickedMovie)
   }
 }
 

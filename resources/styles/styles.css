@@ -2,3 +2,7 @@ body {
   background-color: #5c00e6;
   color: #ffff66;
 }
+
+.selected {
+  color: #22bdf0;
+}

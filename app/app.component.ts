@@ -1,11 +1,10 @@
 import { Movie } from './movie.model';
 import { Component, EventEmitter } from 'angular2/core';
 import { MovieListComponent } from './movie-list.component';
-import {NewMovieComponent} from './new-movie.component';
 
 @Component({
   selector: 'my-app',
-  directives: [MovieListComponent, NewMovieComponent],
+  directives: [MovieListComponent],
   template:`
     <div class="container">
       <img src="resources/images/logo.jpg" />
@@ -14,7 +13,6 @@ import {NewMovieComponent} from './new-movie.component';
         [movieList]="movies"
         (onMovieSelect)="movieSelected($event)">
       </movie-list>
-      <new-movie></new-movie>
     </div>
   `
 })

@@ -7,12 +7,12 @@ import {Movie} from './movie.model';
   template:`
   <h3>Add Movie</h3>
   <div class="movie-form">
-    <input placeholder="Title">
-    <input placeholder="Genre">
-    <input placeholder="Director">
-    <input placeholder="Year">
-    <input placeholder="Rating">
-    <button (click)="addMovie()" class="btn btn-warning btn-sm">Add</button>
+    <input placeholder="Title" #newTitle>
+    <input placeholder="Genre" #newGenre>
+    <input placeholder="Director" #newDirector>
+    <input placeholder="Year" #newYear>
+    <input placeholder="Rating" #newRating>
+    <button (click)="addMovie(newTitle, newGenre, newDirector, newYear, newRating)" class="btn btn-warning btn-sm">Add</button>
   </div>
   `
 })
@@ -21,7 +21,13 @@ export class NewMovieComponent {
   constructor(){
     this.onSubmitNewMovie = new EventEmitter();
   }
-  addMovie(){
-    console.log("Test Movie");
+  addMovie(addTitle: HTMLInputElement, addGenre:HTMLInputElement, addDirector:HTMLInputElement, addYear:HTMLInputElement, addRating:HTMLInputElement){
+    var newMovie = new Movie(addTitle.value, addGenre.value, addDirector.value, addYear.value, addRating.value );
+    this.onSubmitNewMovie.emit(newMovie);
+    addTitle.value = "";
+    addGenre.value = "";
+    addDirector.value = "";
+    addYear.value = "";
+    addRating.value = "";
   }
 }
